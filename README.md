@@ -9,7 +9,6 @@ A brief description of my package goes here.
    ```poetry install```
 
 This should install the package in a virtual environnement that you will be using during the project. If you need to add new library to the project please do it by using the following command :
-
 ```poetry add NewPackage```
 
 ## Folder structure
