@@ -4,7 +4,7 @@
 ## Installation
  1. First you need to install poetry, you will find all ressources on  [python-poetry](https://python-poetry.org/docs/)
 
- 2. To install the energydisaggregation package, run the following command:
+ 2. To install the energydisaggregation package, run the following command in the ```EnergyDisaggregation/``` folder:
    ```poetry install```
 
 This should install the package in a virtual environnement that you will be using during the project. If you need to add new library to the project please do it by using the following command :
