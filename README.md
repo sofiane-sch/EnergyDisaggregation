@@ -1,6 +1,5 @@
 # EnergyDisaggregation Package
 
-A brief description of my package goes here.
 
 ## Installation
  1. First you need to install poetry, you will find all ressources on  [python-poetry](https://python-poetry.org/docs/)
