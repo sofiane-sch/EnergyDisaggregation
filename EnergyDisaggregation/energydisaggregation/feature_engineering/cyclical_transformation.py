@@ -1,2 +1,2 @@
 def test_cyclical_transformation():
-    print("cyclical transformation module can be accessed")
+    print("Cyclical transformation module can be accessed")

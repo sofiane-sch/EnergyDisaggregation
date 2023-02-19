@@ -1,2 +1,2 @@
 def test_calendar():
-    print("Calendar")
+    print("Calendar module can be accessed")

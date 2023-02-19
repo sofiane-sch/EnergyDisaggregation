@@ -1,2 +1,2 @@
 def test_temperature():
-    print("temperature module can be accessed")
+    print("Temperature module can be accessed")

@@ -1,2 +1,2 @@
 def test_selection():
-    print("selection module can be accessed")
+    print("Selection module can be accessed")
