@@ -24,6 +24,7 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .pytest_cache
+__pycache__/
 
 .DS_Store
 .idea/*
