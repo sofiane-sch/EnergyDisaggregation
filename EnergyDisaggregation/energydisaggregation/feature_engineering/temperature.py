@@ -142,12 +142,65 @@ def temperature_ressentie(df_tot):
 
 def compute_variance(df_tot, window_size):
     df = df_tot.copy()
-    df.reset_index(inplace=True)
-    df.set_index(DATACONFIG["Temperature"], inplace=True)
-    df.sort_index(inplace=True)
+    df = df.reset_index()
+    df = df.set_index(DATACONFIG["Temperature"])
+    df = df.sort_index(inplace=True)
 
     k_rolling_std = df.rolling(window_size).std()
     return k_rolling_std
+
+
+def temperature_lagh(df, lagh, stat=["mean", "std", "max", "min"]):
+    """
+    Obtain the derived-temperature features for the data
+    """
+
+    # Re-order indexes to facilitate the transformation
+    df_swap = df.reorder_levels([DATACONFIG["Region"], DATACONFIG["Date"]]).sort_index()
+
+    # Compute the rolling features according to the given lag
+    df_roll = (
+        df_swap.rolling(lagh)
+        .agg({DATACONFIG["Temperature"]: stat})
+        .fillna(method="bfill")
+        .fillna(method="ffill")
+    )
+
+    # Rename the columns
+    df_roll.columns = [f"{DATACONFIG['Temperature']}_{s}_{lagh}" for s in stat]
+
+    # Re-order indexes to obtain the same frame as initialized
+    df_features_temp = df_roll.reorder_levels(
+        [DATACONFIG["Date"], DATACONFIG["Region"]]
+    ).sort_index()
+    # df_features_temp["Temperature_diff_threshold"] = df_features_temp[DATACONFIG["Temperature"]] - df_features_temp["Minimum Temperature"]
+
+    return df_features_temp
+
+
+def nebul_features(df, lagh, stat=["mean", "std"]):
+    """
+    Obtain the derived-nebulosity features for the data
+    """
+
+    # Re-order indexes to facilitate the transformation
+    df_swap = df.reorder_levels([DATACONFIG["Region"], DATACONFIG["Date"]]).sort_index()
+
+    # Compute the rolling features according to the given lag
+    df_roll = (
+        df_swap.rolling(lagh)
+        .agg({DATACONFIG["Nebulosite"]: stat})
+        .fillna(method="bfill")
+        .fillna(method="ffill")
+    )
+    df_roll.columns = [f"{DATACONFIG['Nebulosite']}_{s}_{lagh}" for s in stat]
+
+    # Re-order indexes to obtain the same frame as initialized
+    df_features_neb = df_roll.reorder_levels(
+        [DATACONFIG["Date"], DATACONFIG["Region"]]
+    ).sort_index()
+
+    return df_features_neb
 
 
 def test_temperature():
