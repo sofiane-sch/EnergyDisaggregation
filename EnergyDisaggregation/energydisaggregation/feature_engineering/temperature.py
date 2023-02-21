@@ -27,14 +27,9 @@ def compute_polynomial_fit(df_tot, region, year):
     temp = df[CONFIG_WEATHER["Temperature"]]
     conso = df[CONFIG_POWER["Power"]]
     fit_poly = np.polyfit(temp, conso, 4)
-
     points = np.linspace(temp.min() - 1, temp.max() + 1, 400)
     values_poly = [np.polyval(fit_poly, i) for i in points]
-    values_gradient = [
-        np.polyval([fit_poly[0] * 4, fit_poly[1] * 3, fit_poly[2] * 2, fit_poly[1]], i)
-        for i in temp
-    ]
-    return points, values_poly, values_gradient
+    return points, values_poly
 
 
 def compute_min_satur(poly_values_x, poly_values_y):
@@ -53,7 +48,7 @@ def create_critval_df(df_tot):
     regions_years = pd.Series(zip(regions, years)).unique()
     df_out = pd.DataFrame()
     for x in regions_years:
-        pt, val, values_gradient = compute_polynomial_fit(df_tot, x[0], x[1])
+        pt, val = compute_polynomial_fit(df_tot, x[0], x[1])
         minimum, saturation = compute_min_satur(pt, val)
         new_row = {
             "years": x[1],
@@ -62,7 +57,6 @@ def create_critval_df(df_tot):
             "saturation": saturation,
         }
         df_out = df_out.append(new_row, ignore_index=True)
-        # df_out['gradient'] = values_gradient
     return df_out
 
 
