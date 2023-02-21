@@ -59,13 +59,14 @@ class Dataloader:
         path_power: str,
         path_weather: str,
         frequency: str = "h",
-        resampling_mode: str = "sum",
+        resampling_mode_power: str = "sum",
+        resampling_mode_weather: str = "mean",
     ):
         df_power = cls.load_power(
-            path_power, frequency=frequency, resampling_mode=resampling_mode
+            path_power, frequency=frequency, resampling_mode=resampling_mode_power
         )
         df_weather = cls.load_weather(
-            path_weather, frequency=frequency, resampling_mode=resampling_mode
+            path_weather, frequency=frequency, resampling_mode=resampling_mode_weather
         )
         df_tot = (
             df_power.reset_index()
