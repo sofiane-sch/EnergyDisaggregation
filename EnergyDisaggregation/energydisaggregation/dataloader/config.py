@@ -10,6 +10,8 @@ CONFIG_WEATHER = {
     "Region": "region (name)",
     "Temperature": "Température (°C)",
     "Nebulosite": "Nebulosité totale",
+    "Vitesse du vent moyen 10 mn": "Vitesse du vent moyen 10 mn",
+    "Humidite": "Humidité",
 }
 
 dict_diff = {
