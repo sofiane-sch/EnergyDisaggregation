@@ -18,6 +18,16 @@ def get_critval(df_tot):
     df_out["diff_seuil"] = (
         df_out["temperature_seuil"] - df_out[CONFIG_WEATHER["Temperature"]]
     )
+    df_out = df_out.drop(
+        columns=[
+            "Consommation brute électricité (MW) - RTE",
+            "Température (°C)",
+            "Nebulosité totale",
+            "Vitesse du vent moyen 10 mn",
+            "Humidité",
+        ]
+    )
+
     return df_out
 
 
@@ -127,7 +137,17 @@ def temperature_ressentie(df_tot):
         * (0.1345 * df_tot[CONFIG_WEATHER["Temperature"]] - 1.59)
         * df_tot["Vitesse du vent en km/h"]
     )
-    return df_tot
+    return df_tot["Température ressentie"]
+
+
+def compute_variance(df_tot, window_size):
+    df = df_tot.copy()
+    df.reset_index(inplace=True)
+    df.set_index(DATACONFIG["Temperature"], inplace=True)
+    df.sort_index(inplace=True)
+
+    k_rolling_std = df.rolling(window_size).std()
+    return k_rolling_std
 
 
 def test_temperature():

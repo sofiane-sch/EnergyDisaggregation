@@ -22,6 +22,15 @@ def get_calendar_features(df_tot):
     df_out["is_bank_holiday"] = df_out["date"].apply(feries.is_bank_holiday)
 
     df_out = df_out.drop(columns=["date", "zone"])
+    df_out = df_out.drop(
+        columns=[
+            "Consommation brute électricité (MW) - RTE",
+            "Température (°C)",
+            "Nebulosité totale",
+            "Vitesse du vent moyen 10 mn",
+            "Humidité",
+        ]
+    )
     return df_out
 
 
