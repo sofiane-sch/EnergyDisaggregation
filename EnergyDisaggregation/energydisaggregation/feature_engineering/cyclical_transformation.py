@@ -1,5 +1,7 @@
-def cyclical_encoder(df, col, max_val):
-    df = df.copy()
+import numpy as np
+
+def cyclical_encoder(df_tot, col, max_val):
+    df = df_tot.copy()
     # On encode les paramètres cycliques (heure, mois, etc) à l'aide de deux colonnes sin et cos
     df[col + "_sin"] = np.sin(2 * np.pi * df[col] / max_val)
     df[col + "_cos"] = np.cos(2 * np.pi * df[col] / max_val)
