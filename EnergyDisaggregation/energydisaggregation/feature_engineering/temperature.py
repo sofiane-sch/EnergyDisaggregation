@@ -14,7 +14,7 @@ def get_critval(df_tot):
     df_out = df_out.set_index([CONFIG_POWER["Date"], CONFIG_POWER["Region"]])
     df_out.drop(columns=["years", "regions"])
 
-    df_out = compute_gradient(df_out)
+    # df_out = compute_gradient(df_out)
     df_out["diff_seuil"] = (
         df_out["temperature_seuil"] - df_out[CONFIG_WEATHER["Temperature"]]
     )
