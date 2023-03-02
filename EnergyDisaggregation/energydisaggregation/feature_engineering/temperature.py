@@ -49,6 +49,8 @@ def compute_min_satur(poly_values_x, poly_values_y):
         if poly_values_y[i - 1] < poly_values_y[i] > poly_values_y[i + 1]
     ]
     minimum = poly_values_x[np.argmin(poly_values_y)]
+    if len(saturation) == 0:
+        saturation = [poly_values_x[np.argmax(poly_values_y)]]
     return minimum, saturation
 
 
