@@ -18,8 +18,10 @@ def get_calendar_features(df_tot):
     df_out["saison"] = dates.map(get_season)
     df_out["week_day"] = dates.dayofweek
     df_out["month"] = dates.month
+    df_out["hour"] = dates.hour
     df_out["is_holiday"] = df_out[["date", "zone"]].apply(get_holiday_for_zone, axis=1)
     df_out["is_bank_holiday"] = df_out["date"].apply(feries.is_bank_holiday)
+    df_out["day_of_year"] = df_out["date"].apply(day_of_year)
 
     df_out = df_out.drop(columns=["date", "zone"])
     df_out = df_out.drop(
@@ -74,6 +76,10 @@ def get_zone(a_region):
 
 def get_holiday_for_zone(row):
     return holidays.is_holiday_for_zone(row["date"], row["zone"])
+
+
+def day_of_year(date_str):
+    return date_str.timetuple().tm_yday
 
 
 def test_calendar():
