@@ -62,6 +62,8 @@ def get_dataframe(temp_lagh=48, neb_lagh=3, time_lagh=7):
             df_nebul,
             df_cycl_m,
             df_cycl_w,
+            df_cycl_h,
+            df_lag1,
             df_lag,
         ],
         axis=1,
