@@ -29,6 +29,7 @@ class Base(ABC):
         os.makedirs(os.path.dirname(dir), exist_ok=True)
         pickle.dump(self.model, open(dir, "wb"))
         print("Model saved to {}".format(dir))
+        pass
 
     def load(self, filename):
         """Loads a trained model from a file."""

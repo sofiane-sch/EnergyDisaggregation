@@ -1,8 +1,6 @@
 from EnergyDisaggregation.energydisaggregation.models.base import Base
 import torch
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 import torch.nn.functional as F
 from torch.nn import Linear
